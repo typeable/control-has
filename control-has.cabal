@@ -1,0 +1,39 @@
+name:                control-has
+version:             0.1.0.0
+synopsis: Typeclass for things that have parts
+license:             AllRightsReserved
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  ghc-options:         -Wall
+  exposed-modules:     Control.Has
+                       Control.EnvT
+  build-depends:       base
+                     , exceptions
+                     , lens
+                     , monad-control
+                     , mtl
+                     , resourcet
+                     , transformers-base
+  if !impl(ghcjs)
+    build-depends:     katip
+                     , missing-lens
+  default-language:    Haskell2010
+  default-extensions:  ConstraintKinds
+                     , DataKinds
+                     , DefaultSignatures
+                     , DerivingStrategies
+                     , FlexibleContexts
+                     , FlexibleInstances
+                     , FunctionalDependencies
+                     , GADTs
+                     , GeneralizedNewtypeDeriving
+                     , KindSignatures
+                     , RankNTypes
+                     , StandaloneDeriving
+                     , TypeOperators
+                     , TypeFamilies
+                     , UndecidableInstances
+                     , UndecidableSuperClasses
