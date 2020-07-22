@@ -6,8 +6,7 @@ module Control.Has
   , MonadHas
   , Fieldy
   , Generic
-  )
-where
+  ) where
 
 import Control.Lens
 import Control.Monad.Reader as X
