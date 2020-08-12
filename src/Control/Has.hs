@@ -64,9 +64,7 @@ class Fieldy (r :: *) where
 instance {-# OVERLAPPABLE #-} (Fieldy r, Elem e (Fields r)) => Has e r where
   part = getLens lensList
 
-class (MonadReader r m, HasAll es r)
-  => MonadHas (es :: [*]) (r :: *) (m :: * -> *) | m -> r
-instance (MonadReader r m, HasAll es r) => MonadHas es r m
+type MonadHas es r m = (MonadReader r m, HasAll es r)
 
 instance GetLens e (e ': es) 'Z where
   getLens (LLCons l _) = l
