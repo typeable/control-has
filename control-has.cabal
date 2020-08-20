@@ -19,7 +19,6 @@ library
                      , transformers-base
   if !impl(ghcjs)
     build-depends:     katip
-                     , missing-lens
   default-language:    Haskell2010
   default-extensions:  ConstraintKinds
                      , DataKinds

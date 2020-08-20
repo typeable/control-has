@@ -1,4 +1,5 @@
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 module Control.EnvT
   ( EnvT(..)
@@ -18,7 +19,6 @@ import Control.Monad.Trans.Control
 import Control.Monad.Trans.Resource
 import Control.Monad.Zip
 #ifndef ghcjs_HOST_OS
-import Control.Lens.Missing
 import Katip
 import Katip.Monadic
 #endif
@@ -56,6 +56,14 @@ runEnvT :: forall r m a. EnvT r m a -> r -> m a
 runEnvT m r = flip runReaderT r . unEnvT $ m
 
 #ifndef ghcjs_HOST_OS
+-- FIXME: These lens should probably be moved into a separate package
+-- or sent to upstream katip.
+makeLensesFor
+  [ ("ltsLogEnv", "_ltsLogEnv")
+  , ("ltsContext", "_ltsContext")
+  , ("ltsNamespace", "_ltsNamespace")
+  ] ''KatipContextTState
+
 instance (Has KatipContextTState r, MonadIO m)
   => KatipContext (EnvT r m) where
   getKatipContext = view $ part . _ltsContext
