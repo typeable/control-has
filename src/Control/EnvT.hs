@@ -4,6 +4,7 @@
 module Control.EnvT
   ( EnvT(..)
   , runEnvT
+  , execEnvT
   , module X
   ) where
 
@@ -52,8 +53,15 @@ deriving newtype instance
   (MonadBaseControl b m, Monad m)
   => MonadBaseControl b (EnvT r m)
 
+-- | Run 'EnvT' transformer.
 runEnvT :: forall r m a. EnvT r m a -> r -> m a
 runEnvT m r = flip runReaderT r . unEnvT $ m
+{-# INLINE runEnvT #-}
+
+-- | Same as 'runEnvT' but with arguments flipped.
+execEnvT :: forall r m a. r -> EnvT r m a -> m a
+execEnvT = flip runEnvT
+{-# INLINE execEnvT #-}
 
 #ifndef ghcjs_HOST_OS
 -- FIXME: These lens should probably be moved into a separate package
