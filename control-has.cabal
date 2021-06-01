@@ -17,8 +17,6 @@ library
                      , mtl
                      , resourcet
                      , transformers-base
-  if !impl(ghcjs)
-    build-depends:     katip
   default-language:    Haskell2010
   default-extensions:  ConstraintKinds
                      , DataKinds

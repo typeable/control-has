@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 module Control.EnvT
@@ -19,10 +18,6 @@ import Control.Monad.Reader as X
 import Control.Monad.Trans.Control
 import Control.Monad.Trans.Resource
 import Control.Monad.Zip
-#ifndef ghcjs_HOST_OS
-import Katip
-import Katip.Monadic
-#endif
 
 
 -- | The only reason this exists is that there are a lot of instances for
@@ -62,28 +57,6 @@ runEnvT m r = flip runReaderT r . unEnvT $ m
 execEnvT :: forall r m a. r -> EnvT r m a -> m a
 execEnvT = flip runEnvT
 {-# INLINE execEnvT #-}
-
-#ifndef ghcjs_HOST_OS
--- FIXME: These lens should probably be moved into a separate package
--- or sent to upstream katip.
-makeLensesFor
-  [ ("ltsLogEnv", "_ltsLogEnv")
-  , ("ltsContext", "_ltsContext")
-  , ("ltsNamespace", "_ltsNamespace")
-  ] ''KatipContextTState
-
-instance (Has KatipContextTState r, MonadIO m)
-  => KatipContext (EnvT r m) where
-  getKatipContext = view $ part . _ltsContext
-  localKatipContext f = local (part . _ltsContext %~ f)
-  getKatipNamespace = view $ part . _ltsNamespace
-  localKatipNamespace f = local (part . _ltsNamespace %~ f)
-
-instance (Has KatipContextTState r, MonadIO m)
-  => Katip (EnvT r m) where
-  getLogEnv = view $ part . _ltsLogEnv
-  localLogEnv f = local (part . _ltsLogEnv %~ f)
-#endif
 
 instance MonadResource m => MonadResource (EnvT r m) where
   liftResourceT = lift . liftResourceT
