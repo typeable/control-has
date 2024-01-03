@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 module Control.EnvT
@@ -13,12 +14,15 @@ import Control.Lens
 import Control.Monad.Base
 import Control.Monad.Catch
 import Control.Monad.Except
-import Control.Monad.Fail
 import Control.Monad.Reader as X
 import Control.Monad.Trans.Control
 import Control.Monad.Trans.Resource
 import Control.Monad.Zip
 
+#if MIN_VERSION_base(4,18,0)
+import Control.Monad
+import Control.Monad.Fix
+#endif
 
 -- | The only reason this exists is that there are a lot of instances for
 -- 'EnvT, which simply pass the implementation to the inner 'm'
