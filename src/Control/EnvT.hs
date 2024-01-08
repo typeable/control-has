@@ -19,7 +19,7 @@ import Control.Monad.Trans.Control
 import Control.Monad.Trans.Resource
 import Control.Monad.Zip
 
-#if MIN_VERSION_base(4,18,0)
+#if MIN_VERSION_mtl(2,3,0)
 import Control.Monad
 import Control.Monad.Fix
 #endif

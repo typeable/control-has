@@ -9,7 +9,11 @@ module Control.Has
   ) where
 
 import Control.Lens
+-- reexport all from Reader except Control.Monad etc
+-- to correspond mtl-2.3+
 import Control.Monad.Reader as X
+  ( MonadReader(..), asks, Reader, runReader, mapReader, withReader
+  , ReaderT(ReaderT), runReaderT, mapReaderT, withReaderT )
 import Data.Kind
 import GHC.Generics as G
 
