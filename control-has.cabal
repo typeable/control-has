@@ -1,36 +1,41 @@
-cabal-version:       2.4
-name:                control-has
-version:             0.2.0.0
-synopsis: Typeclass for things that have parts
-license-file:        LICENSE
-build-type:          Simple
+cabal-version: 2.4
+name:          control-has
+version:       0.2.0.0
+synopsis:      Typeclass for things that have parts
+license-file:  LICENSE
+build-type:    Simple
 
 library
-  hs-source-dirs:      src
-  ghc-options:         -Wall
-  exposed-modules:     Control.Has
-                       Control.EnvT
-  build-depends:       base
-                     , exceptions
-                     , lens
-                     , monad-control
-                     , mtl
-                     , resourcet
-                     , transformers-base
-  default-language:    Haskell2010
-  default-extensions:  ConstraintKinds
-                     , DataKinds
-                     , DefaultSignatures
-                     , DerivingStrategies
-                     , FlexibleContexts
-                     , FlexibleInstances
-                     , FunctionalDependencies
-                     , GADTs
-                     , GeneralizedNewtypeDeriving
-                     , KindSignatures
-                     , RankNTypes
-                     , StandaloneDeriving
-                     , TypeOperators
-                     , TypeFamilies
-                     , UndecidableInstances
-                     , UndecidableSuperClasses
+  hs-source-dirs:     src
+  ghc-options:        -Wall
+  exposed-modules:
+    Control.EnvT
+    Control.Has
+
+  build-depends:
+    , base
+    , exceptions
+    , lens
+    , monad-control
+    , mtl
+    , resourcet
+    , transformers-base
+
+  default-language:   Haskell2010
+  default-extensions:
+    ConstraintKinds
+    DataKinds
+    DefaultSignatures
+    DerivingStrategies
+    FlexibleContexts
+    FlexibleInstances
+    FunctionalDependencies
+    GADTs
+    GeneralizedNewtypeDeriving
+    KindSignatures
+    RankNTypes
+    StandaloneDeriving
+    TypeFamilies
+    TypeOperators
+    UndecidableInstances
+    UndecidableSuperClasses
