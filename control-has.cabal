@@ -13,7 +13,7 @@ library
     Control.Has
 
   build-depends:
-    , base
+    , base               >=4.10
     , exceptions
     , lens
     , monad-control
