@@ -24,6 +24,10 @@ import Control.Monad
 import Control.Monad.Fix
 #endif
 
+#if !MIN_VERSION_base(4,13,0)
+import Control.Monad.Fail
+#endif
+
 -- | The only reason this exists is that there are a lot of instances for
 -- 'EnvT, which simply pass the implementation to the inner 'm'
 -- such as 'MonadLogger'.
